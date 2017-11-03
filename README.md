@@ -2,6 +2,7 @@
 Small web app to demonstrate Spring Security
 
 Project made during the Spring & Hibernate for Beginners course on www.udemy.com.
+
 **Features:**
 - User authentication
 - Page access authorization based on roles
