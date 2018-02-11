@@ -10,8 +10,8 @@
 	<name>spring-security-demo</name>
 
 	<properties>
-		<springframework.version>4.3.9.RELEASE</springframework.version>
-		<springsecurity.version>4.2.3.RELEASE</springsecurity.version>
+		<springframework.version>5.0.3.RELEASE</springframework.version>
+		<springsecurity.version>5.0.1.RELEASE</springsecurity.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
