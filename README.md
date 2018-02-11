@@ -14,6 +14,7 @@ Project made during the Spring & Hibernate for Beginners course on www.udemy.com
 - Spring MVC
 - Spring Security
 - Hibernate ORM
+- I am updating to Spring 5 before adding any new features
 
 Database engine used: MySQL
 
