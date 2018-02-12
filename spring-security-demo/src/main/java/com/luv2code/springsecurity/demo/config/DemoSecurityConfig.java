@@ -3,10 +3,12 @@
  */
 package com.luv2code.springsecurity.demo.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 /**
  * @author Mihai-Tudor Popescu
@@ -23,9 +25,16 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// add users for in-memory authentication
+		//UserBuilder users = User.withDefaultPasswordEncoder();
 		auth.inMemoryAuthentication().withUser("adrian").password("ady123").roles("EMPLOYEE");
 		auth.inMemoryAuthentication().withUser("karl").password("karl123").roles("MANAGER");
 		auth.inMemoryAuthentication().withUser("michael").password("mike123").roles("ADMIN");
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Bean
+	public static NoOpPasswordEncoder passwordEncoder() {
+		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
 	}
 
 }
