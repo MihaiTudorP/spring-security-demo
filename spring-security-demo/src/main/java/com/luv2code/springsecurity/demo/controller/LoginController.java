@@ -17,6 +17,6 @@ import com.luv2code.springsecurity.demo.genericsettings.UrlConstants;
 public class LoginController {
 	@GetMapping(UrlConstants.CUSTOM_LOGIN_PAGE)
 	public String showCustomLoginPage() {
-		return "plain-login";
+		return "login-with-manual-csrf";
 	}
 }
