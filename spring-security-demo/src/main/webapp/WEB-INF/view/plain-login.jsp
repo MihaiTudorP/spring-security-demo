@@ -5,15 +5,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SpringSecurityDemo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>SpringSecurityDemo</title>
+	<style type="text/css">
+		.failed{
+			color:red;
+		}
+	</style>
 </head>
 <body>
 <h1>SpringSecurityDemo - Login page</h1>
 <form:form action="${pageContext.request.contextPath}/authenticateUser" method="POST">
 	<!-- Check for login error -->
 	<c:if test="${param.error != null}">
-		<i>Sorry! You entered an invalid username/password.</i>
+		<i class="failed">Sorry! You entered an invalid username/password.</i>
 	</c:if>
 	<!-- Login credential fields -->
 	<p>User name: <input type="text" name="username"></p>
