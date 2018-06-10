@@ -7,9 +7,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>TestSecurity - Admin's view</title>
+<title>TestSecurity - Leaders' view</title>
 </head>
 <body>
-
+	<h1>TestSecurity - Leaders' home page</h1>
+	<hr />
+	<p>
+		We have our annual holiday Carribean cruise coming up! Register now!<br> Keep
+		this trip a secret, don't tell the regular employees :D
+	</p>
+	<hr />
+	<a href="${pageContext.request.contextPath}/">Back to home page</a>
+	<form:form action="${pageContext.request.contextPath}/logout"
+		method="POST">
+		<input type="submit" value="Logout" />
+	</form:form>
 </body>
 </html>
