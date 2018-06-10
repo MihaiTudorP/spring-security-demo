@@ -7,10 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>TestSecurity - leaders' view</title>
+<title>TestSecurity - Leaders' view</title>
 </head>
 <body>
-	<h1>TestSecurity - leaders' home page</h1>
+	<h1>TestSecurity - Leaders' home page</h1>
 	<hr />
 	<p>
 		See you in Brazil ... for our annual Leadership retreat!<br> Keep
