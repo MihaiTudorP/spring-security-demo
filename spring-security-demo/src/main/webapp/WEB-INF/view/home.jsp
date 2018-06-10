@@ -23,15 +23,17 @@
 		<security:authentication property="principal.authorities" />
 	</p>
 	<hr />
-	<!-- Add link to point to /leaders/** for managers -->
+	
 	<security:authorize access="hasRole('MANAGER')">
+		<!-- Add link to point to /leaders/** for managers -->
 		<p>
 			<a href="${pageContext.request.contextPath}/leaders">Leadership
 				meeting</a> (Only for management people)
 		</p>
 	</security:authorize>
-	<!-- Add link to point to /systems/** for admins -->
+	
 	<security:authorize access="hasRole('ADMIN')">
+		<!-- Add link to point to /systems/** for admins -->
 		<p>
 			<a href="${pageContext.request.contextPath}/systems">Admin
 				meeting</a> (Only for admin people)
