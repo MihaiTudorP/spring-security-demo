@@ -16,7 +16,12 @@
 			<p>Welcome to the TestSecurity company home page!</p>
 			<hr />
 			<p>Your roles are: <security:authentication property="principal.authorities"/></p>
-			
+			<hr />
+			<!-- Add link to point to /leaders/** for managers -->
+			<p>
+				<a href="${pageContext.request.contextPath}/leaders">Leadership meeting</a> (Only for management people)
+			</p>
+			<hr />
 			<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 				<input type="submit" value="Logout" />
 			</form:form>
