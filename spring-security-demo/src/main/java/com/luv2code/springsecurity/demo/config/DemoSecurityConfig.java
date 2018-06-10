@@ -24,6 +24,13 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
+	private static final String SYSTEMS_PATH = "/systems/**";
+	private static final String LEADERS_PATH = "/leaders/**";
+	private static final String ROOT_PATH = "/";
+	private static final String ADMIN_ROLE = "ADMIN";
+	private static final String MANAGER_ROLE = "MANAGER";
+	private static final String EMPLOYEE_ROLE = "EMPLOYEE";
+
 	/* (non-Javadoc)
 	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)
 	 */
@@ -32,14 +39,17 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		// add users for in-memory authentication
 		UserBuilder users = User.withDefaultPasswordEncoder();
 		auth.inMemoryAuthentication()
-			.withUser(users.username("adrian").password("ady123").roles("EMPLOYEE"))
-			.withUser(users.username("karl").password("karl123").roles("EMPLOYEE", "MANAGER"))
-			.withUser(users.username("michael").password("mike123").roles("EMPLOYEE", "ADMIN"));
+			.withUser(users.username("adrian").password("ady123").roles(EMPLOYEE_ROLE))
+			.withUser(users.username("karl").password("karl123").roles(EMPLOYEE_ROLE, MANAGER_ROLE))
+			.withUser(users.username("michael").password("mike123").roles(EMPLOYEE_ROLE, ADMIN_ROLE));
 	}
 	
 	@Override
 	protected void configure(HttpSecurity httpSec) throws Exception{
 		httpSec.authorizeRequests()
+			.antMatchers(ROOT_PATH).hasRole(EMPLOYEE_ROLE)
+			.antMatchers(LEADERS_PATH).hasRole(MANAGER_ROLE)
+			.antMatchers(SYSTEMS_PATH).hasRole(ADMIN_ROLE)
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
