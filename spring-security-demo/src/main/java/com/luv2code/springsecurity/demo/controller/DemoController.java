@@ -15,7 +15,7 @@ import com.luv2code.springsecurity.demo.genericsettings.ViewNameConstants;
  */
 @Controller
 public class DemoController {
-	
+
 	@GetMapping(UrlConstants.ROOT_PATH)
 	public String showHome() {
 		return ViewNameConstants.HOME_VIEW_NAME;
@@ -31,5 +31,10 @@ public class DemoController {
 	@GetMapping(UrlConstants.SYSTEMS_MAIN_VIEW_URL)
 	public String showAdminView() {
 		return ViewNameConstants.SYSTEMS_MAIN_VIEW_NAME;
+	}
+	
+	@GetMapping(UrlConstants.ACCESS_DENIED_VIEW)
+	public String showAccessDenied() {
+		return ViewNameConstants.ACCESS_DENIED_VIEW;
 	}
 }

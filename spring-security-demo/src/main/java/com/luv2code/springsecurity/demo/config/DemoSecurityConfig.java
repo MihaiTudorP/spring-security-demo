@@ -24,6 +24,8 @@ import com.luv2code.springsecurity.demo.genericsettings.UrlConstants;
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+	
+
 	/* (non-Javadoc)
 	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)
 	 */
@@ -40,18 +42,20 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSec) throws Exception{
 		httpSec.authorizeRequests()
-		.antMatchers(UrlConstants.ROOT_PATH).hasRole(RoleConstants.EMPLOYEE_ROLE)
-		.antMatchers(UrlConstants.LEADERS_PATH).hasRole(RoleConstants.MANAGER_ROLE)
-		.antMatchers(UrlConstants.SYSTEMS_PATH).hasRole(RoleConstants.ADMIN_ROLE)
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage(UrlConstants.CUSTOM_LOGIN_PAGE)
-		.loginProcessingUrl(UrlConstants.AUTHENTICATE_USER_URL)
-		.permitAll()
-		.and()
-		.logout()
-		.permitAll();
+			.antMatchers(UrlConstants.ROOT_PATH).hasRole(RoleConstants.EMPLOYEE_ROLE)
+			.antMatchers(UrlConstants.LEADERS_PATH).hasRole(RoleConstants.MANAGER_ROLE)
+			.antMatchers(UrlConstants.SYSTEMS_PATH).hasRole(RoleConstants.ADMIN_ROLE)
+			.anyRequest().authenticated()
+			.and()
+				.formLogin()
+					.loginPage(UrlConstants.CUSTOM_LOGIN_PAGE)
+					.loginProcessingUrl(UrlConstants.AUTHENTICATE_USER_URL)
+					.permitAll()
+			.and()
+				.logout()
+				.permitAll()
+			.and()
+				.exceptionHandling().accessDeniedPage(UrlConstants.ACCESS_DENIED_VIEW);
 	}
 
 }

@@ -11,4 +11,5 @@ public class ViewNameConstants {
 	public static final String SYSTEMS_MAIN_VIEW_NAME = "systems";
 	public static final String LEADERS_MAIN_VIEW_NAME = "leaders";
 	public static final String HOME_VIEW_NAME = "home";
+	public static final String ACCESS_DENIED_VIEW = "access-denied";
 }
