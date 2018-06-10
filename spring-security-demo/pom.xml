@@ -73,12 +73,27 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-		
-		<!-- adding Spring Security taglibs so that I can use Spring Security features in my JSP pages -->
+
+		<!-- adding Spring Security taglibs so that I can use Spring Security features 
+			in my JSP pages -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${springsecurity.version}</version>
+		</dependency>
+
+		<!-- MySQL - database support -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.46</version>
+		</dependency>
+
+		<!-- Connection pooling -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
 		</dependency>
 
 	</dependencies>

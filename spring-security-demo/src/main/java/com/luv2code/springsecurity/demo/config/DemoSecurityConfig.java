@@ -3,11 +3,15 @@
  */
 package com.luv2code.springsecurity.demo.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.debug.SecurityDebugBeanFactoryPostProcessor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
@@ -23,7 +27,8 @@ import com.luv2code.springsecurity.demo.genericsettings.UrlConstants;
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+	@Autowired
+	private DataSource securityDataSource;
 	
 
 	/* (non-Javadoc)
@@ -32,11 +37,14 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// add users for in-memory authentication
-		UserBuilder users = User.withDefaultPasswordEncoder();
-		auth.inMemoryAuthentication()
-		.withUser(users.username("adrian").password("ady123").roles(RoleConstants.EMPLOYEE_ROLE))
-		.withUser(users.username("karl").password("karl123").roles(RoleConstants.EMPLOYEE_ROLE, RoleConstants.MANAGER_ROLE))
-		.withUser(users.username("michael").password("mike123").roles(RoleConstants.EMPLOYEE_ROLE, RoleConstants.ADMIN_ROLE));
+//		UserBuilder users = User.withDefaultPasswordEncoder();
+//		auth.inMemoryAuthentication()
+//		.withUser(users.username("adrian").password("ady123").roles(RoleConstants.EMPLOYEE_ROLE))
+//		.withUser(users.username("karl").password("karl123").roles(RoleConstants.EMPLOYEE_ROLE, RoleConstants.MANAGER_ROLE))
+//		.withUser(users.username("michael").password("mike123").roles(RoleConstants.EMPLOYEE_ROLE, RoleConstants.ADMIN_ROLE));
+		
+		// taking users using JDBC
+		auth.jdbcAuthentication().dataSource(securityDataSource);
 	}
 
 	@Override
