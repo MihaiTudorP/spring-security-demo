@@ -24,15 +24,19 @@
 	</p>
 	<hr />
 	<!-- Add link to point to /leaders/** for managers -->
-	<p>
-		<a href="${pageContext.request.contextPath}/leaders">Leadership
-			meeting</a> (Only for management people)
-	</p>
+	<security:authorize access="hasRole('MANAGER')">
+		<p>
+			<a href="${pageContext.request.contextPath}/leaders">Leadership
+				meeting</a> (Only for management people)
+		</p>
+	</security:authorize>
 	<!-- Add link to point to /systems/** for admins -->
-	<p>
-		<a href="${pageContext.request.contextPath}/systems">Admin meeting</a>
-		(Only for admin people)
-	</p>
+	<security:authorize access="hasRole('ADMIN')">
+		<p>
+			<a href="${pageContext.request.contextPath}/systems">Admin
+				meeting</a> (Only for admin people)
+		</p>
+	</security:authorize>
 	<hr />
 	<form:form action="${pageContext.request.contextPath}/logout"
 		method="POST">
