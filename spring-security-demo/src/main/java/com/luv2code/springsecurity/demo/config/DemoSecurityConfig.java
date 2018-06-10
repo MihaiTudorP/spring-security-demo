@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
+import com.luv2code.springsecurity.demo.genericsettings.RoleConstants;
 import com.luv2code.springsecurity.demo.genericsettings.UrlConstants;
 
 /**
@@ -23,14 +24,6 @@ import com.luv2code.springsecurity.demo.genericsettings.UrlConstants;
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-
-	private static final String SYSTEMS_PATH = "/systems/**";
-	private static final String LEADERS_PATH = "/leaders/**";
-	private static final String ROOT_PATH = "/";
-	private static final String ADMIN_ROLE = "ADMIN";
-	private static final String MANAGER_ROLE = "MANAGER";
-	private static final String EMPLOYEE_ROLE = "EMPLOYEE";
-
 	/* (non-Javadoc)
 	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)
 	 */
@@ -39,26 +32,26 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		// add users for in-memory authentication
 		UserBuilder users = User.withDefaultPasswordEncoder();
 		auth.inMemoryAuthentication()
-			.withUser(users.username("adrian").password("ady123").roles(EMPLOYEE_ROLE))
-			.withUser(users.username("karl").password("karl123").roles(EMPLOYEE_ROLE, MANAGER_ROLE))
-			.withUser(users.username("michael").password("mike123").roles(EMPLOYEE_ROLE, ADMIN_ROLE));
+		.withUser(users.username("adrian").password("ady123").roles(RoleConstants.EMPLOYEE_ROLE))
+		.withUser(users.username("karl").password("karl123").roles(RoleConstants.EMPLOYEE_ROLE, RoleConstants.MANAGER_ROLE))
+		.withUser(users.username("michael").password("mike123").roles(RoleConstants.EMPLOYEE_ROLE, RoleConstants.ADMIN_ROLE));
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity httpSec) throws Exception{
 		httpSec.authorizeRequests()
-			.antMatchers(ROOT_PATH).hasRole(EMPLOYEE_ROLE)
-			.antMatchers(LEADERS_PATH).hasRole(MANAGER_ROLE)
-			.antMatchers(SYSTEMS_PATH).hasRole(ADMIN_ROLE)
-			.anyRequest().authenticated()
-			.and()
-			.formLogin()
-				.loginPage(UrlConstants.CUSTOM_LOGIN_PAGE)
-				.loginProcessingUrl(UrlConstants.AUTHENTICATE_USER_URL)
-				.permitAll()
-			.and()
-				.logout()
-				.permitAll();
+		.antMatchers(UrlConstants.ROOT_PATH).hasRole(RoleConstants.EMPLOYEE_ROLE)
+		.antMatchers(UrlConstants.LEADERS_PATH).hasRole(RoleConstants.MANAGER_ROLE)
+		.antMatchers(UrlConstants.SYSTEMS_PATH).hasRole(RoleConstants.ADMIN_ROLE)
+		.anyRequest().authenticated()
+		.and()
+		.formLogin()
+		.loginPage(UrlConstants.CUSTOM_LOGIN_PAGE)
+		.loginProcessingUrl(UrlConstants.AUTHENTICATE_USER_URL)
+		.permitAll()
+		.and()
+		.logout()
+		.permitAll();
 	}
-	
+
 }
