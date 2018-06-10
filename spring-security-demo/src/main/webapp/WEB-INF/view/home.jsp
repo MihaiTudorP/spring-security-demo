@@ -11,6 +11,7 @@
 		<body>
 			<h1>TestSecurity Company Home Page</h1>
 			<hr>
+			<p>Hello, <security:authentication property="principal.username"/>
 			<p>Welcome to the TestSecurity company home page!</p>
 			
 			<form:form action="${pageContext.request.contextPath}/logout" method="POST">
