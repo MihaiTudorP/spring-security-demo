@@ -17,13 +17,13 @@
 	
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
-	<title>SpringSecurityDemo</title>
+	<title>TestSecurity</title>
 
 </head>
 <body>
 	<div class="container">
 		<div class="page-header">
-    		<h1>SpringSecurityDemo</h1>
+    		<h1>TestSecurity</h1>
     	</div>
 		
 		<div id="loginbox" style="margin-top: 50px;"
