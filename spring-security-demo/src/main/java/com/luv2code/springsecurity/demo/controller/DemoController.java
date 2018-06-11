@@ -35,6 +35,6 @@ public class DemoController {
 	
 	@GetMapping(UrlConstants.ACCESS_DENIED_VIEW)
 	public String showAccessDenied() {
-		return ViewNameConstants.ACCESS_DENIED_VIEW;
+		return ViewNameConstants.ACCESS_DENIED_VIEW_NAME;
 	}
 }

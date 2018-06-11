@@ -6,11 +6,14 @@ package com.luv2code.springsecurity.demo.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 import com.luv2code.springsecurity.demo.genericsettings.RoleConstants;
 import com.luv2code.springsecurity.demo.genericsettings.UrlConstants;
@@ -50,7 +53,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(UrlConstants.ROOT_PATH).hasRole(RoleConstants.EMPLOYEE_ROLE)
 			.antMatchers(UrlConstants.LEADERS_PATH).hasRole(RoleConstants.MANAGER_ROLE)
 			.antMatchers(UrlConstants.SYSTEMS_PATH).hasRole(RoleConstants.ADMIN_ROLE)
-			.anyRequest().authenticated()
+			//.anyRequest().authenticated()
 			.and()
 				.formLogin()
 					.loginPage(UrlConstants.CUSTOM_LOGIN_PAGE)
@@ -62,5 +65,12 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.exceptionHandling().accessDeniedPage(UrlConstants.ACCESS_DENIED_VIEW);
 	}
+	
+	@Bean
+	public UserDetailsManager userDetailsManager() {
+		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+		jdbcUserDetailsManager.setDataSource(securityDataSource);
+		return jdbcUserDetailsManager;
+	} 
 
 }

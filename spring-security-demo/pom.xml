@@ -12,8 +12,8 @@
 	<name>spring-security-demo</name>
 
 	<properties>
-		<springframework.version>5.0.3.RELEASE</springframework.version>
-		<springsecurity.version>5.0.1.RELEASE</springsecurity.version>
+		<springframework.version>5.0.6.RELEASE</springframework.version>
+		<springsecurity.version>5.0.5.RELEASE</springsecurity.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -94,6 +94,21 @@
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.2</version>
+		</dependency>
+
+		<!-- Hibernate validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.10.Final</version>
+		</dependency>
+		
+		<!-- Project Lombok - for less code - focus on what's really important -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
