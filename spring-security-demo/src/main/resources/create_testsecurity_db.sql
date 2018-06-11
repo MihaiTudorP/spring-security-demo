@@ -25,4 +25,8 @@ grant all on testsecurity.* to `testsecurity`@`%` identified by 'testsecurity';
     
 insert into `users` values ('adrian','{noop}ady123',1), ('karl','{noop}karl123',1), ('michael','{noop}mike123',1);
 insert into `authorities` values ('adrian','ROLE_EMPLOYEE'), ('karl','ROLE_EMPLOYEE'), ('karl','ROLE_MANAGER'), ('michael', 'ROLE_EMPLOYEE'), ('michael', 'ROLE_ADMIN');
+alter table `users` modify `password` varchar(100);
+update users set `password`='{bcrypt}$2a$04$.VzcBSbm70WPeRNx0pEwCe1gGrgPqNMv84utlzU.rH5RAjcgcSPI6' where `username`='adrian';
+update users set `password`='{bcrypt}$2a$04$6J3JMOXrxQ9dMB6VG/8VDunghGw0n/BvhiRGG7atJtPISUgnlWlia' where `username`='karl';
+update users set `password`='{bcrypt}$2a$04$AhPD57TVp/8SuFshABldXOwNFUcEpG9xJ9Td7fWu.JEQMhp9Z0eYO' where `username`='michael';
 commit;
