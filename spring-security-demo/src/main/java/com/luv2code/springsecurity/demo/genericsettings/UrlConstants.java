@@ -21,4 +21,7 @@ public class UrlConstants {
 	public static final String SYSTEMS_MAIN_VIEW_URL = "/systems";
 	public static final String LEADERS_MAIN_VIEW_URL = "/leaders";
 	public static final String ACCESS_DENIED_VIEW = "/access-denied";
+	
+	public static final String RESOURCES_DIR_PATH = "/resources/";
+	public static final String RESOURCES_RECURSIVE_PATH = "/resources/**";
 }
