@@ -24,4 +24,9 @@ public class UrlConstants {
 	
 	public static final String RESOURCES_DIR_PATH = "/resources/";
 	public static final String RESOURCES_RECURSIVE_PATH = "/resources/**";
+	
+	public static final String CUSTOMER_PAGE_URL = "/customer/**";
+	public static final String CUSTOMER_DELETE_URL = "/customer/delete";
+	public static final String CUSTOMER_SAVE_URL = "/customer/save*";
+	public static final String CUSTOMER_SHOW_FORM_URL = "/customer/showForm*";
 }
