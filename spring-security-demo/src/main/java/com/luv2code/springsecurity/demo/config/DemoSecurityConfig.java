@@ -53,7 +53,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(UrlConstants.CUSTOMER_SHOW_FORM_URL).hasAnyRole(RoleConstants.MANAGER_ROLE, RoleConstants.ADMIN_ROLE)
 			.antMatchers(UrlConstants.CUSTOMER_SAVE_URL).hasAnyRole(RoleConstants.MANAGER_ROLE, RoleConstants.ADMIN_ROLE)
 			.antMatchers(UrlConstants.CUSTOMER_DELETE_URL).hasRole(RoleConstants.ADMIN_ROLE)
-			.antMatchers(UrlConstants.CUSTOMER_PAGE_URL).hasRole(RoleConstants.EMPLOYEE_ROLE)
+			.antMatchers(UrlConstants.CUSTOMER_PAGE_ROOT_URL).hasRole(RoleConstants.EMPLOYEE_ROLE)
 			.antMatchers(UrlConstants.RESOURCES_RECURSIVE_PATH).permitAll()
 			.antMatchers(UrlConstants.ROOT_PATH).hasRole(RoleConstants.EMPLOYEE_ROLE)
 			.antMatchers(UrlConstants.LEADERS_PATH).hasRole(RoleConstants.MANAGER_ROLE)

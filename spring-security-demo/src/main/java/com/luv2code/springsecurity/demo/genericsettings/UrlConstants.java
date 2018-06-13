@@ -25,8 +25,15 @@ public class UrlConstants {
 	public static final String RESOURCES_DIR_PATH = "/resources/";
 	public static final String RESOURCES_RECURSIVE_PATH = "/resources/**";
 	
-	public static final String CUSTOMER_PAGE_URL = "/customer/**";
+	public static final String CUSTOMER_PAGE_ROOT_URL = "/customer/**";
+	public static final String CUSTOMER_PAGE_URL = "/customer";
 	public static final String CUSTOMER_DELETE_URL = "/customer/delete";
 	public static final String CUSTOMER_SAVE_URL = "/customer/save*";
 	public static final String CUSTOMER_SHOW_FORM_URL = "/customer/showForm*";
+	
+	public static final String DELETE_URL = "/delete";
+	public static final String UPDATE_CUSTOMER_FORM_URL = "/updateCustomerForm";
+	public static final String SAVE_CUSTOMER_URL = "/saveCustomer";
+	public static final String ADD_CUSTOMER_FORM_URL = "/addCustomerForm";
+	public static final String LIST_URL = "/list";
 }
