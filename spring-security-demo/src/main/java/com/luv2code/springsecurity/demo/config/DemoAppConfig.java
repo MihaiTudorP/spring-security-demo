@@ -10,14 +10,19 @@ import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -37,6 +42,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableSpringDataWebSupport
+@EnableJpaRepositories("com.luv2code.springsecurity.demo.repositories")
 @ComponentScan(basePackages="com.luv2code.springsecurity.demo")
 @PropertySource({"classpath:security-persistence-mysql.properties", "classpath:crmapp-mysql.properties"})
 public class DemoAppConfig implements WebMvcConfigurer{
@@ -145,6 +152,16 @@ public class DemoAppConfig implements WebMvcConfigurer{
 		return getDataSourceFromProperties(CRMAPP_JDBC_DRIVER_PROPERTY_KEY, CRMAPP_JDBC_URL_PROPERTY_KEY, CRMAPP_JDBC_USER__PROPERTY_KEY, CRMAPP_JDBC_PASSWORD_PROPERTY_KEY, CRMAPP_CONNECTION_POOL_INITIAL_POOL_SIZE_PROPERTY_KEY, CRMAPP_CONNECTION_POOL_MIN_POOL_SIZE_PROPERTY_KEY, CRMAPP_CONNECTION_POOL_MAX_POOL_SIZE_PROPERTY_KEY, CRMAPP_CONNECTION_POOL_MAX_IDLE_TIME_PROPERTY_KEY);
 	}
 	
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NumberFormatException, PropertyVetoException {
+		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		entityManagerFactoryBean.setDataSource(crmDataSource());
+		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+		entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(HIBERNATE_PACKAGES_TO_SCAN_PROPERTY_KEY));
+		entityManagerFactoryBean.setJpaProperties(getHibernateProperties(HIBERNATE_DIALECT_PROPERTY_KEY, HIBERNATE_SHOW_SQL_PROPERTY_KEY, HIBERNATE_DIALECT_PROPERTY_KEY, HIBERNATE_SHOW_SQL_PROPERTY_KEY));
+		return entityManagerFactoryBean;
+	}
+	
 	private Properties getHibernateProperties(String hibernateDialectPropertyKey, String hibernateShowSQLPropertyKey, String customHibernateDialectPropertyKey, String customHibernateShowSQLPropertyKey) {
 		Properties props = new Properties();
 		logger.info("Getting Hibernate properties from the keys below.\n" +
@@ -156,26 +173,12 @@ public class DemoAppConfig implements WebMvcConfigurer{
 	}
 	
 	@Bean
-	public LocalSessionFactoryBean sessionFactory() throws NumberFormatException, PropertyVetoException{
-		
-		// create session factory
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		
-		// set the properties
-		sessionFactory.setDataSource(crmDataSource());
-		sessionFactory.setPackagesToScan(env.getProperty(HIBERNATE_PACKAGES_TO_SCAN_PROPERTY_KEY));
-		sessionFactory.setHibernateProperties(getHibernateProperties(HIBERNATE_DIALECT_PROPERTY_KEY, HIBERNATE_SHOW_SQL_PROPERTY_KEY, HIBERNATE_DIALECT_PROPERTY_KEY, HIBERNATE_SHOW_SQL_PROPERTY_KEY));
-		
-		return sessionFactory;
-	}
-	
-	@Bean
 	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+	public JpaTransactionManager transactionManager(SessionFactory sessionFactory) {
 		
 		// setup transaction manager based on session factory
-		HibernateTransactionManager txManager = new HibernateTransactionManager();
-		txManager.setSessionFactory(sessionFactory);
+		JpaTransactionManager txManager = new JpaTransactionManager();
+		txManager.setEntityManagerFactory(sessionFactory);
 
 		return txManager;
 	}	

@@ -39,7 +39,7 @@
 				<!-- put new button: Add Customer -->
 			
 				<input type="button" value="Add Customer"
-					   onclick="window.location.href='showFormForAdd'; return false;"
+					   onclick="window.location.href='addCustomerForm'; return false;"
 					   class="add-button"
 				/>
 			
@@ -64,22 +64,22 @@
 				</tr>
 				
 				<!-- loop over and print our customers -->
-				<c:forEach var="tempCustomer" items="${customers}">
+				<c:forEach var="customer" items="${customers}">
 				
 					<!-- construct an "update" link with customer id -->
-					<c:url var="updateLink" value="/customer/showFormForUpdate">
-						<c:param name="customerId" value="${tempCustomer.id}" />
+					<c:url var="updateLink" value="/customer/updateCustomerForm">
+						<c:param name="customerId" value="${customer.id}" />
 					</c:url>					
 
 					<!-- construct an "delete" link with customer id -->
 					<c:url var="deleteLink" value="/customer/delete">
-						<c:param name="customerId" value="${tempCustomer.id}" />
+						<c:param name="customerId" value="${customer.id}" />
 					</c:url>					
 					
 					<tr>
-						<td> ${tempCustomer.firstName} </td>
-						<td> ${tempCustomer.lastName} </td>
-						<td> ${tempCustomer.email} </td>
+						<td> ${customer.firstName} </td>
+						<td> ${customer.lastName} </td>
+						<td> ${customer.email} </td>
 
 						<security:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
 						

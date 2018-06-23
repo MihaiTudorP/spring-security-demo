@@ -33,10 +33,10 @@ public class CustomerController {
 	public String listCustomers(Model model) {
 		
 		// get customers from the service
-		List<Customer> theCustomers = customerService.getCustomers();
+		List<Customer> customers = customerService.getCustomers();
 				
 		// add the customers to the model
-		model.addAttribute("customers", theCustomers);
+		model.addAttribute("customers", customers);
 		
 		return ViewNameConstants.LIST_CUSTOMERS_VIEW_NAME;
 	}

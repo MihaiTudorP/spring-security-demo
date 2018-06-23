@@ -46,6 +46,7 @@ public class DefaultCustomerService implements CustomerService {
 	 * @see com.luv2code.springsecurity.demo.services.CustomerService#getCustomer(int)
 	 */
 	@Override
+	@Transactional
 	public Customer getCustomer(int id) {
 		return customerRepository.getOne(id);
 	}
@@ -54,6 +55,7 @@ public class DefaultCustomerService implements CustomerService {
 	 * @see com.luv2code.springsecurity.demo.services.CustomerService#deleteCustomer(int)
 	 */
 	@Override
+	@Transactional
 	public void deleteCustomer(int id) {
 		customerRepository.deleteById(id);
 	}
