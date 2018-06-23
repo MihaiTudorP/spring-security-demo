@@ -1,6 +1,9 @@
 package com.luv2code.springsecurity.demo.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,14 +29,19 @@ public class CustomerController {
 
 	private static final String REDIRECT_CUSTOMER_LIST_URL = "redirect:/customer/list";
 	
+	private Logger logger = Logger.getLogger(getClass().getName());
+	
 	@Autowired
 	private CustomerService customerService;
 	
 	@GetMapping(UrlConstants.LIST_URL)
 	public String listCustomers(Model model) {
+		logger.info("Displaying the customers in the database...");
 		
 		// get customers from the service
 		List<Customer> customers = customerService.getCustomers();
+		
+		logger.info("Got "+ customers.size() + " customers from the database. Passing them to the view.");
 				
 		// add the customers to the model
 		model.addAttribute("customers", customers);
@@ -42,6 +50,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping(UrlConstants.ADD_CUSTOMER_FORM_URL)
+	@Transactional
 	public String showFormForAdd(Model model) {
 		
 		// create model attribute to bind form data
@@ -53,6 +62,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping(UrlConstants.SAVE_CUSTOMER_URL)
+	@Transactional
 	public String saveCustomer(@ModelAttribute(CUSTOMER_ATTRIBUTE_NAME) Customer customer) {
 		
 		// save the customer using our service
@@ -62,11 +72,14 @@ public class CustomerController {
 	}
 	
 	@GetMapping(UrlConstants.UPDATE_CUSTOMER_FORM_URL)
+	@Transactional
 	public String showFormForUpdate(@RequestParam(CUSTOMER_ID_PARAM_NAME) int id,
 									Model model) {
 		
 		// get the customer from our service
-		Customer customer = customerService.getCustomer(id);	
+		Customer customer = customerService.getCustomer(id);
+		
+		logger.info("Editing customer: " + customer.toString());
 		
 		// set customer as a model attribute to pre-populate the form
 		model.addAttribute(CUSTOMER_ATTRIBUTE_NAME, customer);

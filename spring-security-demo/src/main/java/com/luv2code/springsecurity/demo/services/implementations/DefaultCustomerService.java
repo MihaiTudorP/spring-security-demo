@@ -37,7 +37,6 @@ public class DefaultCustomerService implements CustomerService {
 	 * @see com.luv2code.springsecurity.demo.services.CustomerService#saveCustomer(com.luv2code.springsecurity.demo.entities.Customer)
 	 */
 	@Override
-	@Transactional
 	public void saveCustomer(Customer customer) {
 		customerRepository.save(customer);
 	}
@@ -46,7 +45,6 @@ public class DefaultCustomerService implements CustomerService {
 	 * @see com.luv2code.springsecurity.demo.services.CustomerService#getCustomer(int)
 	 */
 	@Override
-	@Transactional
 	public Customer getCustomer(int id) {
 		return customerRepository.getOne(id);
 	}
