@@ -4,7 +4,7 @@
 <html>
 
 <head>
-	<title>Save Customer</title>
+	<title>TestSecurity - Save Customer</title>
 
 	<link type="text/css"
 		  rel="stylesheet"
