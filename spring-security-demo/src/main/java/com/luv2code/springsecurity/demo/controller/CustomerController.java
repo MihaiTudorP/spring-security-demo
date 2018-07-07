@@ -50,7 +50,6 @@ public class CustomerController {
 	}
 	
 	@GetMapping(UrlConstants.ADD_CUSTOMER_FORM_URL)
-	@Transactional
 	public String showFormForAdd(Model model) {
 		
 		// create model attribute to bind form data
